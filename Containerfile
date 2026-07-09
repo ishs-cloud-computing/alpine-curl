@@ -16,8 +16,8 @@ RUN LLVM_VER=$(clang --version | grep -oiE 'version [0-9]+' | grep -oE '[0-9]+' 
       -DCMAKE_AR="$(command -v llvm-ar)" \
       -DCMAKE_RANLIB="$(command -v llvm-ranlib)" \
       -DCMAKE_NM="$(command -v llvm-nm)" \
-      -DCMAKE_C_FLAGS="-Oz -ffunction-sections -fdata-sections" \
-      -DCMAKE_EXE_LINKER_FLAGS="-static -fuse-ld=lld -rtlib=compiler-rt -unwindlib=none -Wl,--gc-sections" \
+      -DCMAKE_C_FLAGS="-Oz -flto=thin -ffunction-sections -fdata-sections" \
+      -DCMAKE_EXE_LINKER_FLAGS="-static -flto=thin -fuse-ld=lld -rtlib=compiler-rt -unwindlib=none -Wl,--gc-sections" \
       -DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_CURL=ON -DBUILD_CURL_EXE=ON \
       -DCURL_ENABLE_SSL=OFF \
       -DCURL_ZLIB=OFF -DCURL_BROTLI=OFF -DCURL_ZSTD=OFF \
