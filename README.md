@@ -55,11 +55,11 @@ git submodule update --init --recursive
 이미지를 빌드합니다.
 
 ```bash
-podman build --platform linux/amd64 -t alpine-curl:3.23 .
+podman build --platform linux/amd64 -t alpine-curl:3.23-2 .
 
 # 또는 Docker 사용
 
-docker build --platform linux/amd64 -t alpine-curl:3.23 -f Containerfile .
+docker build --platform linux/amd64 -t alpine-curl:3.23-2 -f Containerfile .
 ```
 
 > 노드 아키텍처가 arm64면 --platform linux/arm64로 맞추세요.

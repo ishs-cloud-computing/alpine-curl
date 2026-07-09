@@ -7,7 +7,7 @@ RUN apk add --no-cache clang lld compiler-rt musl-dev cmake samurai && \
  
 WORKDIR /src
 COPY curl ./curl
- 
+
 RUN LLVM_VER=$(clang --version | grep -oiE 'version [0-9]+' | grep -oE '[0-9]+' | head -1) && \
     export PATH="/usr/lib/llvm${LLVM_VER}/bin:${PATH}" && \
     cmake -G Ninja -S curl -B build \
