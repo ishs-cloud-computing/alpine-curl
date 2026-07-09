@@ -1,13 +1,13 @@
 # syntax=docker/dockerfile:1
 FROM alpine:3.23 AS build
-
+ 
 RUN apk add --no-cache clang lld compiler-rt musl-dev cmake samurai && \
     LLVM_VER=$(clang --version | grep -oiE 'version [0-9]+' | grep -oE '[0-9]+' | head -1) && \
     apk add --no-cache "llvm${LLVM_VER}"
-
+ 
 WORKDIR /src
 COPY curl ./curl
-
+ 
 RUN LLVM_VER=$(clang --version | grep -oiE 'version [0-9]+' | grep -oE '[0-9]+' | head -1) && \
     export PATH="/usr/lib/llvm${LLVM_VER}/bin:${PATH}" && \
     cmake -G Ninja -S curl -B build \
@@ -30,7 +30,8 @@ RUN LLVM_VER=$(clang --version | grep -oiE 'version [0-9]+' | grep -oE '[0-9]+' 
       -DCURL_DISABLE_FTP=ON -DCURL_DISABLE_FILE=ON \
       -DCURL_DISABLE_POP3=ON -DCURL_DISABLE_IMAP=ON \
       -DCURL_DISABLE_SMTP=ON -DCURL_DISABLE_SMB=ON \
-      -DCURL_DISABLE_GOPHER=ON -DCURL_DISABLE_MQTT=ON && \
+      -DCURL_DISABLE_GOPHER=ON -DCURL_DISABLE_MQTT=ON \
+      -DCURL_DISABLE_VERBOSE_STRINGS=ON && \
     cmake --build build && \
     llvm-strip build/src/curl && cp build/src/curl /curl
 
