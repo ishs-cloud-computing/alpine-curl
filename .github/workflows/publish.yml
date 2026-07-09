@@ -2,7 +2,7 @@
 name: publish
 on:
   push:
-    tags: ["v*"]        # v3.21 처럼 태그 push 시 발행
+    tags: ["*"]        # 3.21 처럼 태그 push 시 발행
   workflow_dispatch:
 
 permissions:
@@ -29,8 +29,9 @@ jobs:
       - uses: docker/build-push-action@v6
         with:
           context: .
+          file: ./Containerfile
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/zenru1023/alpine-curl:3.23
-            ghcr.io/zenru1023/alpine-curl:latest
+            ghcr.io/ishs-cloud-computing/alpine-curl:3.23
+            ghcr.io/ishs-cloud-computing/alpine-curl:latest
