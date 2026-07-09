@@ -6,6 +6,17 @@
 ghcr.io/ishs-cloud-computing/alpine-curl:3.23
 ```
 
+## curl과 다른 점
+
+이 curl은 **HTTP/HTTPS 프로브 용도의 최소 빌드**입니다. 아래 기능은 크기 최소화를 위해 제거했습니다.
+
+- **HTTPS/TLS**: SSL 미포함 — `https://` 불가, HTTP만 지원
+- **프로토콜**: FTP, FILE, DICT, TELNET, TFTP, POP3, IMAP, SMTP, SMB, GOPHER, MQTT, RTSP, LDAP/LDAPS 제거
+- **HTTP 버전**: HTTP/1.1만 (HTTP/2·HTTP/3 없음)
+- **압축**: zlib, brotli, zstd 없음
+- **기타**: IDN(libidn2), PSL(libpsl), SSH/SCP/SFTP(libssh2) 없음
+- **진단**: verbose 문자열 제거로 `-v` 출력이 축약됨
+
 ## 설계 의도
 
 이 이미지는 대회 과제의 세 가지 제약을 동시에 만족시키기 위해 만들어졌습니다.
