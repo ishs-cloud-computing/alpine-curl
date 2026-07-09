@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM alpine:3.23 AS build
+FROM alpine@sha256:1beb0dc0a51de7ff38e3b5274078a2e0b81113ba5c7535e1a03d5913a5edbda3 AS build
  
 RUN apk add --no-cache clang lld compiler-rt musl-dev cmake samurai && \
     LLVM_VER=$(clang --version | grep -oiE 'version [0-9]+' | grep -oE '[0-9]+' | head -1) && \
@@ -35,7 +35,7 @@ RUN LLVM_VER=$(clang --version | grep -oiE 'version [0-9]+' | grep -oE '[0-9]+' 
     cmake --build build && \
     llvm-strip build/src/curl && cp build/src/curl /curl
 
-FROM alpine:3.23
+FROM alpine@sha256:1beb0dc0a51de7ff38e3b5274078a2e0b81113ba5c7535e1a03d5913a5edbda3
 LABEL org.opencontainers.image.source="https://github.com/ishs-cloud-computing/alpine-curl"
 LABEL org.opencontainers.image.licenses="curl AND MIT AND GPL-2.0-only"
 COPY --from=build /curl /usr/bin/curl
