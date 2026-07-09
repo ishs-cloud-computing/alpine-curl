@@ -35,4 +35,6 @@ RUN LLVM_VER=$(clang --version | grep -oiE 'version [0-9]+' | grep -oE '[0-9]+' 
     llvm-strip build/src/curl && cp build/src/curl /curl
 
 FROM alpine:3.23
+LABEL org.opencontainers.image.source="https://github.com/ishs-cloud-computing/alpine-curl"
+LABEL org.opencontainers.image.licenses="BSD-3-Clause"
 COPY --from=build /curl /usr/bin/curl
